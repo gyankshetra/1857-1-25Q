@@ -1,0 +1,26 @@
+<!-- Share Button -->
+<button onclick="shareQuiz()" class="share-btn">
+  <i class="fa-solid fa-share-nodes"></i> Share
+</button>
+
+<!-- JavaScript Code -->
+<script>
+function shareQuiz() {
+  const shareData = {
+    title: '1857 Ki Kranti: 25 VVI MCQs',
+    text: 'BPSC TRE 4.0 ke liye 1857 Ki Kranti ke VVI MCQs solve karein!\n\nHumare Telegram Channel ko bhi join karein: https://t.me/+2C6LVEzV0go0YzBl \n\nQuiz Link:',
+    url: window.location.href // Yeh current page ka link automatic le lega
+  };
+
+  // Agar browser Web Share support karta hai (Mobile Browsers)
+  if (navigator.share) {
+    navigator.share(shareData)
+      .then(() => console.log('Successfully shared'))
+      .catch((error) => console.log('Error sharing:', error));
+  } else {
+    // Agar laptop/desktop browser hai toh direct Telegram share link khulega
+    const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(shareData.text)}`;
+    window.open(telegramUrl, '_blank');
+  }
+}
+</script>
